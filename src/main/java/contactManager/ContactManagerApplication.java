@@ -1,12 +1,41 @@
 package contactManager;
 import util.Input;
 
+import java.io.*;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class ContactManagerApplication {
     private static final Input input = new Input();
     private static ArrayList<Contact> contactList = new ArrayList<>();
+
     public static void main(String[] args) {
+
+        System.out.println(System.getProperty("user.dir"));
+        Path contactsDir = Paths.get( "src", "main", "java","contactManager","assets");
+        Path contactsFile = Paths.get( "src", "main", "java","contactManager","assets", "contacts.txt");
+
+        try {
+            Files.createDirectory(contactsDir);
+        } catch(FileAlreadyExistsException e) {
+            System.out.println("Dir exists");
+        } catch (IOException e) {
+            System.out.println("createDirectory exception: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        try {
+            Files.createFile(contactsFile);
+        } catch(FileAlreadyExistsException e) {
+            System.out.println("File exists");
+        } catch (IOException e) {
+            System.out.println("createFile exception: " + e.getMessage());
+            e.printStackTrace();
+        }
+        contactList = writeListFromFile(contactsFile);
 
         boolean exitList = false;
 
@@ -35,13 +64,12 @@ public class ContactManagerApplication {
     }
 
     private static void deleteExistingContact() {
-        Input in = new Input();
         System.out.println("Which contact would you like to delete?");
         for (int i = 0; i < contactList.size(); i++) {
             System.out.println((i+1)+". "+contactList.get(i).getFName()+" "+contactList.get(i).getLName());
         }
         System.out.print("Enter a choice: ");
-        int choice = in.getInt(1,contactList.size());
+        int choice = input.getInt(1,contactList.size());
         contactList.remove(choice-1);
     }
 
@@ -69,5 +97,31 @@ public class ContactManagerApplication {
 
 
 
+    }
+    public static ArrayList<Contact> writeListFromFile(Path contactsFile){
+        ArrayList<Contact> contacts = new ArrayList<>();
+        String str;
+
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(contactsFile.toFile()));
+            while((str = reader.readLine()) != null){
+                Contact contact = writeContactFromString(str);
+                contacts.add(contact);
+            }
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return contacts;
+    }
+    public static Contact writeContactFromString(String str){
+        String[] attr = str.split(",");
+        Contact contact = new Contact();
+        contact.setFName(attr[0]);
+        contact.setLName(attr[1]);
+        contact.setPhoneNum(attr[2]);
+        contact.setEmail(attr[3]);
+
+        return contact;
     }
 }
