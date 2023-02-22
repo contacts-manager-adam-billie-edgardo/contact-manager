@@ -12,4 +12,13 @@ public class Contact {
         this.phoneNum = phoneNum;
         this.email = email;
     }
+
+//    public String formattedPhoneNum(long phoneNumber){
+//        String formattedPhoneNum;
+//
+//        StringBuilder str = new StringBuilder();
+//
+//
+//        return formattedPhoneNum;
+//    }
 }
