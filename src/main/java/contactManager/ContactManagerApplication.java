@@ -1,6 +1,7 @@
 package contactManager;
 import util.Input;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 public class ContactManagerApplication {
 
@@ -47,7 +48,12 @@ public class ContactManagerApplication {
     }
 
     private static void showContacts() {
-        //show contacts
+        if(){
+            for (int i = 0; i < Contact.size; i++){
+                System.out.println();
+            }
+        }
+
     }
 
     public static void writeMenu(){
