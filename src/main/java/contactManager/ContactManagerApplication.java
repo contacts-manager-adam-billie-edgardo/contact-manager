@@ -4,10 +4,9 @@ import util.Input;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class ContactManagerApplication {
-
+    private static final Input input = new Input();
+    private static ArrayList<Contact> contactList = new ArrayList<>();
     public static void main(String[] args) {
-
-    Input input = new Input();
 
         boolean exitList = false;
 
@@ -48,12 +47,12 @@ public class ContactManagerApplication {
     }
 
     private static void showContacts() {
-        if(){
-            for (int i = 0; i < Contact.size; i++){
-                System.out.println();
-            }
+        if (!contactList.isEmpty()) {
+            for (int i = 0; i < contactList.size(); i++)
+                System.out.println(contactList);
+        } else {
+            System.out.println("Your contact list is empty!! Shame!!");
         }
-
     }
 
     public static void writeMenu(){
