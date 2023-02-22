@@ -1,9 +1,11 @@
 package contactManager;
+import util.Input;
+
 import java.util.Scanner;
 public class ContactManagerApplication {
     public static void main(String[] args) {
 
-    Scanner input = new Scanner(System.in);
+    Input input = new Input();
 
         boolean exitList = false;
 
@@ -11,7 +13,7 @@ public class ContactManagerApplication {
 
             //print menu to prompt user to choose item from list
             writeMenu();
-            int userOptions = Integer.parseInt(input.nextLine());
+            int userOptions = input.getInt(1, 5);
             switch (userOptions) {
                 case 1:
                     showContacts();
@@ -49,6 +51,10 @@ public class ContactManagerApplication {
 
     public static void writeMenu(){
 
-            System.out.println("Press ");
+            System.out.println("Press: \n 1. To View Contacts \n 2. To Add A New Contact \n " +
+                    "3. To Search A Contact \n 4. Delete An Existing Contact \n 5. To Exit Program"  );
+
+
+
     }
 }
