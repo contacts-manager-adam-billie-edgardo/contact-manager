@@ -51,6 +51,20 @@ public class ContactManagerApplication {
 
     private static void addContact() {
         //add contacts method
+        input.getString();
+        do {
+            Contact contact = new Contact();
+            System.out.print("Enter contact's first name: ");
+            contact.setFName(input.getString());
+            System.out.print("Enter contact's last name: ");
+            contact.setLName(input.getString());
+            System.out.print("Enter contact's phone number: ");
+            // use getPhoneNumber to validate a 10-digit number from the user
+            System.out.print("Enter contact's email: ");
+            contact.setEmail(input.getString());
+            contactList.add(contact);
+            System.out.printf("Added contact: %s %s%n", contact.getFName(), contact.getLName());
+        } while (input.yesNo("Add another contact? Y/N"));
     }
 
     private static void showContacts() {
