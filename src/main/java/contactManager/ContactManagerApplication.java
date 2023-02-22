@@ -46,25 +46,16 @@ public class ContactManagerApplication {
     }
 
     private static void searchContactByName() {
-        String fName = null;
-        String lName = null;
+        String fName;
+        String lName;
 
-        System.out.print("Type contact first name to view" );
+        System.out.println("Type contact first name to view" );
         fName = input.getString();
 
         System.out.println("Type contact last name to view");
         lName = input.getString();
 
-        for (Contact contact : contactList) {
-            if (fName.equals(contact.getFName())) {
-                System.out.println("Contacts with " + fName);
-            } else
-                if (lName.equals(contact.getLName())) {
-                    System.out.println("Contacts with " + lName);
-            } else {
-                    System.out.println("Contact dose not exist, yet!");
-                }
-        }
+        System.out.println("Here's your contact " + lName + "," + fName + );
     }
 
     private static void addContact() {
