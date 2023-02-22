@@ -74,11 +74,43 @@ public class ContactManagerApplication {
     }
 
     private static void searchContactByName() {
-        //search contacts method
+        String fName = null;
+        String lName = null;
+
+        System.out.print("Type contact first name to view" );
+        fName = input.getString();
+
+        System.out.println("Type contact last name to view");
+        lName = input.getString();
+
+        for (Contact contact : contactList) {
+            if (fName.equals(contact.getFName())) {
+                System.out.println("Contacts with " + fName);
+            } else
+                if (lName.equals(contact.getLName())) {
+                    System.out.println("Contacts with " + lName);
+            } else {
+                    System.out.println("Contact dose not exist, yet!");
+                }
+        }
     }
 
     private static void addContact() {
         //add contacts method
+        input.getString();
+        do {
+            Contact contact = new Contact();
+            System.out.print("Enter contact's first name: ");
+            contact.setFName(input.getString());
+            System.out.print("Enter contact's last name: ");
+            contact.setLName(input.getString());
+            System.out.print("Enter contact's phone number: ");
+            // use getPhoneNumber to validate a 10-digit number from the user
+            System.out.print("Enter contact's email: ");
+            contact.setEmail(input.getString());
+            contactList.add(contact);
+            System.out.printf("Added contact: %s %s%n", contact.getFName(), contact.getLName());
+        } while (input.yesNo("Add another contact? Y/N"));
     }
 
     private static void showContacts() {
