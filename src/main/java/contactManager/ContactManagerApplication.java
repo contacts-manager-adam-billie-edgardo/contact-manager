@@ -1,11 +1,12 @@
 package contactManager;
 import util.Input;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 public class ContactManagerApplication {
+    private static final Input input = new Input();
+    private static ArrayList<Contact> contactList = new ArrayList<>();
     public static void main(String[] args) {
-
-    Input input = new Input();
 
         boolean exitList = false;
 
