@@ -24,7 +24,6 @@ public class Input {
         String input = scanner.nextLine();
         return input.equalsIgnoreCase("y") || input.equalsIgnoreCase("yes");
     }
-
     public int getInt(){
         int input = 0;
 
@@ -104,6 +103,42 @@ public class Input {
         while(!inRange(input,min,max)){
             System.out.print("Not in range. Please reenter: ");
             input = getDouble(min,max);
+        }
+        return input;
+    }
+    public long getLong(){
+        long input = 0;
+
+        while(true){
+            try{
+                input = scanner.nextLong();
+                break;
+            }catch(Exception e){
+                System.out.print("Not the right amount of numbers. Please reenter: ");
+                scanner.nextLine();
+            }
+        }
+        return input;
+    }
+    public long getLong(String prompt){
+        System.out.println(prompt);
+        return getLong();
+    }
+    public long getLong(long min, long max){
+        long input = 0;
+
+        while(true){
+            try{
+                input = scanner.nextInt();
+                break;
+            }catch(Exception e){
+                System.out.print("Not the right amount of numbers. Please reenter: ");
+                scanner.nextLine();
+            }
+        }
+        while(!inRange(input,min,max)){
+            System.out.print("Not in range. Please reenter: ");
+            input = getLong(min,max);
         }
         return input;
     }
