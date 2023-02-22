@@ -35,7 +35,14 @@ public class ContactManagerApplication {
     }
 
     private static void deleteExistingContact() {
-        //deleting contacts method
+        Input in = new Input();
+        System.out.println("Which contact would you like to delete?");
+        for (int i = 0; i < contactList.size(); i++) {
+            System.out.println((i+1)+". "+contactList.get(i).getFName()+" "+contactList.get(i).getLName());
+        }
+        System.out.print("Enter a choice: ");
+        int choice = in.getInt(1,contactList.size());
+        contactList.remove(choice-1);
     }
 
     private static void searchContactByName() {
