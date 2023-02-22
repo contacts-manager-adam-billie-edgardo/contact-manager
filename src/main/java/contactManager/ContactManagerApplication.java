@@ -2,7 +2,6 @@ package contactManager;
 import util.Input;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 public class ContactManagerApplication {
     private static final Input input = new Input();
     private static ArrayList<Contact> contactList = new ArrayList<>();
@@ -83,5 +82,41 @@ public class ContactManagerApplication {
 
 
 
+    }
+
+    private static void formatListAndPrintToConsole(ArrayList<Contact> contacts) {
+        int namePadding = getLongestNameSize(contacts);
+        int phonePadding = 10;
+        int emailPadding = getLongestEmailSize(contacts);
+        System.out.println("_".repeat(namePadding + emailPadding + phonePadding + 10));
+        System.out.printf("| %-" + namePadding + "s | %-" + phonePadding + "s | %-" + emailPadding + "s |%n", "Name", "Phone", "email");
+        System.out.println("-".repeat(namePadding + emailPadding + phonePadding + 10));
+        for (Contact contact : contacts) {
+            System.out.printf("| %-" + namePadding + "s | %-10s | %-" + emailPadding + "s |%n",
+                    contact.getFullName(),
+                    contact.getPhoneNum(),
+                    contact.getEmail()
+            );
+        }
+    }
+
+    private static int getLongestEmailSize(ArrayList<Contact> contacts) {
+        int longestStringSize = "email".length();
+        for (Contact contact : contacts) {
+            if (contact.getEmail().length() > longestStringSize) {
+                longestStringSize = contact.getEmail().length();
+            }
+        }
+        return longestStringSize;
+    }
+
+    private static int getLongestNameSize(ArrayList<Contact> contacts) {
+        int longestStringSize = "Name".length();
+        for (Contact contact : contacts) {
+            if (contact.getFullName().length() > longestStringSize) {
+                longestStringSize = contact.getFullName().length();
+            }
+        }
+        return longestStringSize;
     }
 }
