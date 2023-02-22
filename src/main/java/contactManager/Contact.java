@@ -29,7 +29,7 @@ public class Contact {
 
     //accessors
 
-    public String getfName() {
+    public String getFName() {
         return fName;
     }
 
@@ -38,15 +38,15 @@ public class Contact {
         return String.format("First Name: %s, Last Name: %s, Phone Number: %s, Email: %s",this.fName, this.lName,this.phoneNum,this.email);
     }
 
-    public void setfName(String fName) {
+    public void setFName(String fName) {
         this.fName = fName;
     }
 
-    public String getlName() {
+    public String getLName() {
         return lName;
     }
 
-    public void setlName(String lName) {
+    public void setLName(String lName) {
         this.lName = lName;
     }
 
