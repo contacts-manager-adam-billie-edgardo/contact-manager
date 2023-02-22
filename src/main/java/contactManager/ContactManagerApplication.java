@@ -47,7 +47,12 @@ public class ContactManagerApplication {
     }
 
     private static void showContacts() {
-        //show contacts
+        if (!contactList.isEmpty()) {
+            for (int i = 0; i < contactList.size(); i++)
+                System.out.println(contactList);
+        } else {
+            System.out.println("Your contact list is empty!! Shame!!");
+        }
     }
 
     public static void writeMenu(){
