@@ -14,15 +14,15 @@ public class ContactManagerApplication {
             int userOptions = Integer.parseInt(input.nextLine());
             switch (userOptions) {
                 case 1:
-                    contact();
+//                    contact();
                     break;
                 case 2:
-                    addContact();
+//                    addContact();
                     break;
                 case 3:
-                    searchContactByName();
+//                    searchContactByName();
                 case 4:
-                    deleteExistingContact();
+//                    deleteExistingContact();
                     break;
                 case 5:
                     exitList = true;
