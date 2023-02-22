@@ -7,7 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
+
 public class ContactManagerApplication {
     private static final Input input = new Input();
     private static ArrayList<Contact> contactList = new ArrayList<>();
@@ -35,7 +36,7 @@ public class ContactManagerApplication {
             System.out.println("createFile exception: " + e.getMessage());
             e.printStackTrace();
         }
-        contactList = writeListFromFile(contactsFile);
+        contactList = readListFromFile(contactsFile);
 
         boolean exitList = false;
 
@@ -57,6 +58,7 @@ public class ContactManagerApplication {
                     deleteExistingContact();
                     break;
                 case 5:
+                    writeListToFile (contactsFile, contactList);
                     exitList = true;
                     break;
             }
@@ -130,14 +132,14 @@ public class ContactManagerApplication {
 
 
     }
-    public static ArrayList<Contact> writeListFromFile(Path contactsFile){
+    public static ArrayList<Contact> readListFromFile(Path contactsFile){
         ArrayList<Contact> contacts = new ArrayList<>();
         String str;
 
         try{
             BufferedReader reader = new BufferedReader(new FileReader(contactsFile.toFile()));
             while((str = reader.readLine()) != null){
-                Contact contact = writeContactFromString(str);
+                Contact contact = createContactFromString(str);
                 contacts.add(contact);
             }
 
@@ -146,7 +148,7 @@ public class ContactManagerApplication {
         }
         return contacts;
     }
-    public static Contact writeContactFromString(String str){
+    public static Contact createContactFromString(String str){
         String[] attr = str.split(",");
         Contact contact = new Contact();
         contact.setFName(attr[0]);
@@ -155,5 +157,18 @@ public class ContactManagerApplication {
         contact.setEmail(attr[3]);
 
         return contact;
+    }
+
+    public static void writeListToFile (Path file, ArrayList<Contact> list){
+        ArrayList<String> contactStrings = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            contactStrings.add(list.get(i).toString());
+        }
+
+        try {
+            Files.write(file, contactStrings);
+        } catch (IOException e) {
+            System.out.println("file write exception: " + e.getMessage());
+        }
     }
 }

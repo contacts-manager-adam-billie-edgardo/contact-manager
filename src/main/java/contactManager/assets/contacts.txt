@@ -1,4 +1,5 @@
-Jim,Jones,(210)555-1234,JJones@web.com
-Jill,Jones,(210)555-2345,JJones@web.com
-Jimmy,Jones,(210)555-3456,JJones@web.com
-Jiffy,Jones,(210)555-4567,JJones@web.com
+First Name: Jim, Last Name: Jones, Phone Number: (210)555-1234, Email: JJones@web.com
+First Name: Jill, Last Name: Jones, Phone Number: (210)555-2345, Email: JJones@web.com
+First Name: Jimmy, Last Name: Jones, Phone Number: (210)555-3456, Email: JJones@web.com
+First Name: Jiffy, Last Name: Jones, Phone Number: (210)555-4567, Email: JJones@web.com
+First Name: Jiffy, Last Name: Jones, Phone Number: (210)555-4567, Email: JJones@web.com
