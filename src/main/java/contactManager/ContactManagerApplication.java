@@ -53,6 +53,7 @@ public class ContactManagerApplication {
                     break;
                 case 3:
                     searchContactByName();
+                    break;
                 case 4:
                     deleteExistingContact();
                     break;
@@ -74,17 +75,30 @@ public class ContactManagerApplication {
     }
 
     private static void searchContactByName() {
-        String fName;
-        String lName;
+        String fName = null;
+        String lName = null;
+
+        boolean foundMatch = false;
 
         System.out.println("Type contact first name to view" );
+        input.getString();
         fName = input.getString();
 
         System.out.println("Type contact last name to view");
         lName = input.getString();
 
-        System.out.println("Here's your contact " + lName + "," + fName + );
+        for (int i = 0; i < contactList.size(); i++) {
+
+            if (fName.equalsIgnoreCase(contactList.get(i).getFName()) && lName.equalsIgnoreCase(contactList.get(i).getLName())) {
+                System.out.println(contactList.get(i).toString());
+                foundMatch = true;
+            }
+        }
+        if(!foundMatch) {
+            System.out.println("Contact does not exist, yet!");
+        }
     }
+
 
     private static void addContact() {
         //add contacts method
