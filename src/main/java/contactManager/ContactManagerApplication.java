@@ -126,6 +126,8 @@ public class ContactManagerApplication {
         New data: 
         %s
         """,contactList.get(choice).toString());
+        System.out.print("Press Enter to continue...");
+        input.getString();
     }
 
     private static void searchContactByName() {
