@@ -154,6 +154,8 @@ public class ContactManagerApplication {
         if(!foundMatch) {
             System.out.println("Contact does not exist, yet!");
         }
+        System.out.print("Press Enter to continue...");
+        input.getString();
     }
 
 
@@ -183,6 +185,8 @@ public class ContactManagerApplication {
         } else {
             System.out.println("Your contact list is empty!! Shame!!");
         }
+        System.out.print("Press Enter to continue...");
+        input.getString();
     }
 
     public static void writeMenu(){
@@ -212,8 +216,8 @@ public class ContactManagerApplication {
             printFormattedListLine(contact.getFullName(), namePadding, contact.getPhoneNum(), phonePadding, contact.getEmail(), emailPadding,
                     '|', ANSI_CYAN.code, "", 1);
         }
-        System.out.print(horizontalBorder + "\n Press enter to continue");
-        input.getString();
+        System.out.println(horizontalBorder);
+
     }
 
     private static void printFormattedListLine(String firstColString, int firstColPadding,
