@@ -21,7 +21,7 @@ public class ContactManagerApplication {
         try {
             Files.createDirectory(contactsDir);
         } catch(FileAlreadyExistsException e) {
-            System.out.println("Dir exists");
+            //System.out.println("Dir exists");
         } catch (IOException e) {
             System.out.println("createDirectory exception: " + e.getMessage());
             e.printStackTrace();
@@ -30,7 +30,7 @@ public class ContactManagerApplication {
         try {
             Files.createFile(contactsFile);
         } catch(FileAlreadyExistsException e) {
-            System.out.println("File exists");
+            //System.out.println("File exists");
         } catch (IOException e) {
             System.out.println("createFile exception: " + e.getMessage());
             e.printStackTrace();
@@ -43,7 +43,7 @@ public class ContactManagerApplication {
 
             //print menu to prompt user to choose item from list
             writeMenu();
-            int userOptions = input.getInt(1, 5);
+            int userOptions = input.getInt(1, 6);
             switch (userOptions) {
                 case 1:
                     showContacts();
@@ -57,7 +57,10 @@ public class ContactManagerApplication {
                 case 4:
                     deleteExistingContact();
                     break;
-                case 5:
+                case 5 :
+                    editContact();
+                    break;
+                case 6:
                     writeListToFile (contactsFile, contactList);
                     exitList = true;
                     break;
@@ -76,6 +79,52 @@ public class ContactManagerApplication {
             return;
         }
         contactList.remove(choice-1);
+    }
+    private static void editContact() {
+        System.out.println("Which contact would you like to edit?");
+        for (int i = 0; i < contactList.size(); i++) {
+            System.out.println((i+1)+". "+contactList.get(i).getFName()+" "+contactList.get(i).getLName());
+        }
+        System.out.print("Enter a choice (Enter 0 to cancel): ");
+        int choice = input.getInt(0,contactList.size());
+        if(choice == 0){
+            return;
+        }
+        choice -= 1; //change choice to match contactList index number
+        contactList.get(choice).toString();
+        System.out.print("""
+            What would you like to edit?
+            1. First name
+            2. Last name
+            3. Phone number
+            4. Email
+            """);
+
+        switch(input.getInt(1,4)){
+            case 1 :
+                input.getString();
+                System.out.print("Enter a new first name: ");
+                contactList.get(choice).setFName(input.getString());
+                break;
+            case 2 :
+                input.getString();
+                System.out.print("Enter a new last name: ");
+                contactList.get(choice).setLName(input.getString());
+                break;
+            case 3 :
+                input.getString();
+                contactList.get(choice).setPhoneNum(contactList.get(choice).formattedPhoneNum(input.getNumericString(10, "Enter a new phone number: ")));
+                break;
+            case 4 :
+                input.getString();
+                System.out.print("Enter a new email: ");
+                contactList.get(choice).setEmail(input.getString());
+                break;
+        }
+        System.out.printf("""
+        Contact changed...
+        New data: %s
+        """,contactList.get(choice).toString());
     }
 
     private static void searchContactByName() {
@@ -133,11 +182,16 @@ public class ContactManagerApplication {
 
     public static void writeMenu(){
 
-            System.out.println("Press: \n 1. To View Contacts \n 2. To Add A New Contact \n " +
-                    "3. To Search A Contact \n 4. Delete An Existing Contact \n 5. To Exit Program"  );
-
-
-
+        System.out.print("""
+            1. View all contacts
+            2. Add a new contact
+            3. Search a contact
+            4. Delete an existing contact
+            5. Edit a contact
+            6. Exit program
+            
+            Enter a selection:\s
+            """);
     }
     
     private static void formatListAndPrintToConsole(ArrayList<Contact> contacts) {
