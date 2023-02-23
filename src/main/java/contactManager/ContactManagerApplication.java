@@ -134,7 +134,7 @@ public class ContactManagerApplication {
     
     private static void formatListAndPrintToConsole(ArrayList<Contact> contacts) {
         int namePadding = getLongestNameSize(contacts);
-        int phonePadding = 10;
+        int phonePadding = 13;
         int emailPadding = getLongestEmailSize(contacts);
         System.out.println("_".repeat(namePadding + emailPadding + phonePadding + 10));
         System.out.printf("| %-" + namePadding + "s | %-" + phonePadding + "s | %-" + emailPadding + "s |%n", "Name", "Phone", "email");
