@@ -70,7 +70,7 @@ public class ContactManagerApplication {
         for (int i = 0; i < contactList.size(); i++) {
             System.out.println((i+1)+". "+contactList.get(i).getFName()+" "+contactList.get(i).getLName());
         }
-        System.out.print("Enter a choice: ");
+        System.out.print("Enter a choice (Enter 0 to cancel): ");
         int choice = input.getInt(0,contactList.size());
         if(choice == 0){
             return;
