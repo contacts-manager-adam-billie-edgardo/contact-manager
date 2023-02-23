@@ -159,19 +159,46 @@ public class ContactManagerApplication {
     private static void addContact() {
         //add contacts method
         input.getString();
+        String tempFName;
+        String tempLName;
         do {
             Contact contact = new Contact();
             System.out.print("Enter contact's first name: ");
-            contact.setFName(input.getString());
+            tempFName = input.getString();
             System.out.print("Enter contact's last name: ");
-            contact.setLName(input.getString());
-            contact.setPhoneNum(contact.formattedPhoneNum(input.getNumericString(10, "Enter contact's phone number: ")));
+            tempLName = input.getString();
 
+            if(getMatchingIndex(tempFName,tempLName) > 0){
+                int ndx = getMatchingIndex(tempFName,tempLName);
+                if(input.yesNo("That name already exists. Overwrite? Y/N")){
+                    contactList.get(ndx).setFName(tempFName);
+                    contactList.get(ndx).setLName(tempLName);
+                    contactList.get(ndx).setPhoneNum(contactList.get(ndx).formattedPhoneNum(input.getNumericString(10, "Enter a new phone number: ")));
+                    System.out.print("Enter a new email: ");
+                    contactList.get(ndx).setEmail(input.getString());
+                    continue;
+                }else{
+                    continue;
+                }
+            }
+            contact.setFName(tempFName);
+            contact.setLName(tempLName);
+            contact.setPhoneNum(contact.formattedPhoneNum(input.getNumericString(10, "Enter contact's phone number: ")));
             System.out.print("Enter contact's email: ");
             contact.setEmail(input.getString());
             contactList.add(contact);
             System.out.printf("Added contact: %s %s%n", contact.getFName(), contact.getLName());
+
         } while (input.yesNo("Add another contact? Y/N"));
+    }
+
+    public static int getMatchingIndex(String fName, String lName){
+        for (int i = 0; i < contactList.size(); i++) {
+            if (fName.equalsIgnoreCase(contactList.get(i).getFName()) && lName.equalsIgnoreCase(contactList.get(i).getLName())){
+                return i;
+            }
+        }
+        return -1;
     }
 
     private static void showContacts() {
