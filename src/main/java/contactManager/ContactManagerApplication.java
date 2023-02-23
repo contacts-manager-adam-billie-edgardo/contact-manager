@@ -113,7 +113,7 @@ public class ContactManagerApplication {
             contact.setFName(input.getString());
             System.out.print("Enter contact's last name: ");
             contact.setLName(input.getString());
-            contact.setPhoneNum(contact.formattedPhoneNum(input.getString(10, "Enter contact's phone number: ")));
+            contact.setPhoneNum(contact.formattedPhoneNum(input.getNumericString(10, "Enter contact's phone number: ")));
 
             System.out.print("Enter contact's email: ");
             contact.setEmail(input.getString());

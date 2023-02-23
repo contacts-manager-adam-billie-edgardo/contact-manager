@@ -13,12 +13,14 @@ public class Input {
         String input = scanner.nextLine();
         return input;
     }
-    public String getString(int length, String prompt){
+    public String getNumericString(int length, String prompt){
         do {
             System.out.print(prompt);
             String input = getString();
             if (input.length() != length) {
                 System.out.printf("Must be %d digits long!%n", length);
+            } else if (!input.matches("[0-9]+")) {
+                System.out.println("Must be numbers only!!!");
             } else {
                 return input;
             }
