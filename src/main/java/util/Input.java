@@ -13,6 +13,17 @@ public class Input {
         String input = scanner.nextLine();
         return input;
     }
+    public String getString(int length, String prompt){
+        do {
+            System.out.print(prompt);
+            String input = getString();
+            if (input.length() != length) {
+                System.out.printf("Must be %d digits long!%n", length);
+            } else {
+                return input;
+            }
+        } while (true);
+    }
 
     public boolean yesNo(){
         String input = scanner.nextLine();
