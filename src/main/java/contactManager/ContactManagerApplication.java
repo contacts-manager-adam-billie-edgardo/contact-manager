@@ -70,11 +70,11 @@ public class ContactManagerApplication {
     }
 
     private static void deleteExistingContact() {
-        System.out.println("Which contact would you like to delete?");
+        System.out.println(ANSI_GREEN.code + "Which contact would you like to delete?");
         for (int i = 0; i < contactList.size(); i++) {
             System.out.println((i+1)+". "+contactList.get(i).getFName()+" "+contactList.get(i).getLName());
         }
-        System.out.print("Enter a choice (Enter 0 to cancel): ");
+        System.out.print(ANSI_BLUE.code + "Enter a choice (Enter 0 to cancel): " + ANSI_RESET.code);
         int choice = input.getInt(0,contactList.size());
         if(choice == 0){
             return;
@@ -82,24 +82,24 @@ public class ContactManagerApplication {
         contactList.remove(choice-1);
     }
     private static void editContact() {
-        System.out.println("Which contact would you like to edit?");
+        System.out.println(ANSI_GREEN.code + "Which contact would you like to edit?");
         for (int i = 0; i < contactList.size(); i++) {
             System.out.println((i+1)+". "+contactList.get(i).getFName()+" "+contactList.get(i).getLName());
         }
-        System.out.print("Enter a choice (Enter 0 to cancel): ");
+        System.out.print(ANSI_BLUE.code + "Enter a choice (Enter 0 to cancel): " + ANSI_RESET.code);
         int choice = input.getInt(0,contactList.size());
         if(choice == 0){
             return;
         }
         choice -= 1; //change choice to match contactList index number
-        System.out.println(contactList.get(choice).toString());
-        System.out.print("""
-            What would you like to edit?
+        System.out.println(ANSI_CYAN.code + contactList.get(choice).toString() + ANSI_RESET.code);
+        System.out.printf("""
+            %sWhat would you like to edit?
             1. First name
             2. Last name
             3. Phone number
-            4. Email
-            """);
+            4. Email%s
+            """, ANSI_GREEN.code, ANSI_BLUE.code);
 
         switch(input.getInt(1,4)){
             case 1 :
@@ -114,7 +114,7 @@ public class ContactManagerApplication {
                 break;
             case 3 :
                 input.getString();
-                contactList.get(choice).setPhoneNum(contactList.get(choice).formattedPhoneNum(input.getNumericString(10, "Enter a new phone number: ")));
+                contactList.get(choice).setPhoneNum(contactList.get(choice).formattedPhoneNum(input.getNumericString(10, ANSI_BLUE.code + "Enter a new phone number: " + ANSI_RESET.code)));
                 break;
             case 4 :
                 input.getString();
@@ -123,11 +123,11 @@ public class ContactManagerApplication {
                 break;
         }
         System.out.printf("""
-        Contact changed...
+        %sContact changed...
         New data: 
         %s
-        """,contactList.get(choice).toString());
-        System.out.print("Press Enter to continue...");
+        """,ANSI_GREEN.code ,ANSI_CYAN.code + contactList.get(choice).toString() + ANSI_RESET.code);
+        System.out.print(ANSI_BLUE.code + "Press Enter to continue..." + ANSI_RESET.code);
         input.getString();
     }
 
@@ -137,24 +137,24 @@ public class ContactManagerApplication {
 
         boolean foundMatch = false;
 
-        System.out.println("Type contact first name to view" );
+        System.out.println(ANSI_BLUE.code + "Type contact first name to view" );
         input.getString();
         fName = input.getString();
 
-        System.out.println("Type contact last name to view");
+        System.out.println("Type contact last name to view" + ANSI_RESET.code);
         lName = input.getString();
 
         for (Contact contact : contactList) {
 
             if (fName.equalsIgnoreCase(contact.getFName()) && lName.equalsIgnoreCase(contact.getLName())) {
-                System.out.println(contact.toString());
+                System.out.println(ANSI_CYAN.code + contact.toString() + ANSI_RESET.code);
                 foundMatch = true;
             }
         }
         if(!foundMatch) {
-            System.out.println("Contact does not exist, yet!");
+            System.out.println("Contact does not exist, yet!" + ANSI_RESET.code);
         }
-        System.out.print("Press Enter to continue...");
+        System.out.print(ANSI_BLUE.code + "Press Enter to continue..." + ANSI_RESET.code);
         input.getString();
     }
 
@@ -164,17 +164,17 @@ public class ContactManagerApplication {
         input.getString();
         do {
             Contact contact = new Contact();
-            System.out.print("Enter contact's first name: ");
+            System.out.print(ANSI_BLUE.code + "Enter contact's first name: ");
             contact.setFName(input.getString());
             System.out.print("Enter contact's last name: ");
             contact.setLName(input.getString());
-            contact.setPhoneNum(contact.formattedPhoneNum(input.getNumericString(10, "Enter contact's phone number: ")));
+            contact.setPhoneNum(contact.formattedPhoneNum(input.getNumericString(10, ANSI_BLUE.code + "Enter contact's phone number: ")));
 
             System.out.print("Enter contact's email: ");
             contact.setEmail(input.getString());
             contactList.add(contact);
-            System.out.printf("Added contact: %s %s%n", contact.getFName(), contact.getLName());
-        } while (input.yesNo("Add another contact? Y/N"));
+            System.out.printf(ANSI_GREEN.code + "Added contact: %s %s%n", contact.getFName(), contact.getLName());
+        } while (input.yesNo(ANSI_BLUE.code + "Add another contact? Y/N" + ANSI_RESET.code));
     }
 
     private static void showContacts() {
@@ -183,24 +183,24 @@ public class ContactManagerApplication {
             formatListAndPrintToConsole(contactList);
 
         } else {
-            System.out.println("Your contact list is empty!! Shame!!");
+            System.out.println(ANSI_GREEN.code + "Your contact list is empty!! Shame!!" + ANSI_RESET.code);
         }
-        System.out.print("Press Enter to continue...");
+        System.out.print(ANSI_BLUE.code + "Press Enter to continue..." + ANSI_RESET.code);
         input.getString();
     }
 
     public static void writeMenu(){
 
-        System.out.print("""
-            1. View all contacts
+        System.out.printf("""
+            %s1. View all contacts
             2. Add a new contact
             3. Search a contact
             4. Delete an existing contact
             5. Edit a contact
-            6. Exit program
+            6. Exit program%s
             
-            Enter a selection:\s
-            """);
+            %sEnter a selection:%s\s
+            """, ANSI_GREEN.code, ANSI_RESET.code, ANSI_BLUE.code, ANSI_RESET.code);
     }
     
     private static void formatListAndPrintToConsole(ArrayList<Contact> contacts) {
@@ -210,11 +210,11 @@ public class ContactManagerApplication {
         String horizontalBorder = ANSI_CYAN.code + "-".repeat(namePadding + emailPadding + phonePadding + 10) + ANSI_RESET.code;
 
         System.out.println(ANSI_CYAN.code + "_".repeat(namePadding + emailPadding + phonePadding + 10) + ANSI_RESET.code);
-        printFormattedListLine("Name", namePadding, "Phone", phonePadding, "email", emailPadding, '|', ANSI_CYAN.code, ANSI_YELLOW.code, 1);
+        printFormattedListLine("Name", namePadding, "Phone", phonePadding, "email", emailPadding, '|', ANSI_CYAN.code, ANSI_GREEN.code, 1);
         System.out.println(horizontalBorder);
         for (Contact contact : contacts) {
             printFormattedListLine(contact.getFullName(), namePadding, contact.getPhoneNum(), phonePadding, contact.getEmail(), emailPadding,
-                    '|', ANSI_CYAN.code, "", 1);
+                    '|', ANSI_CYAN.code, ANSI_GREEN.code, 1);
         }
         System.out.println(horizontalBorder);
 

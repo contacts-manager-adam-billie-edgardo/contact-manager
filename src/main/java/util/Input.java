@@ -1,6 +1,7 @@
 package util;
 
 import java.util.Scanner;
+import static contactManager.ColorEscapeCodes.*;
 
 public class Input {
     private Scanner scanner;
@@ -18,9 +19,9 @@ public class Input {
             System.out.print(prompt);
             String input = getString();
             if (input.length() != length) {
-                System.out.printf("Must be %d digits long!%n", length);
+                System.out.printf(ANSI_RED.code + "Must be %d digits long!%n" + ANSI_RESET.code, length);
             } else if (!input.matches("[0-9]+")) {
-                System.out.println("Must be numbers only!!!");
+                System.out.println(ANSI_RED.code +  "Must be numbers only!!!" + ANSI_RESET.code);
             } else {
                 return input;
             }
@@ -59,12 +60,12 @@ public class Input {
                 input = scanner.nextInt();
                 break;
             }catch(Exception e){
-                System.out.print("Not an integer. Please reenter: ");
+                System.out.print(ANSI_RED.code + "Not an integer. Please reenter: " + ANSI_RESET.code);
                 scanner.nextLine();
             }
         }
         if(!inRange(input,min,max)){
-            System.out.print("Not in range. Please reenter: ");
+            System.out.print(ANSI_RED.code + "Not in range. Please reenter: " + ANSI_RESET.code);
             input = getInt(min,max);
         }
         return input;
