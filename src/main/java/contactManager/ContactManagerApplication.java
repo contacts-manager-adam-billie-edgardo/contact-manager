@@ -91,10 +91,10 @@ public class ContactManagerApplication {
         System.out.println("Type contact last name to view");
         lName = input.getString();
 
-        for (int i = 0; i < contactList.size(); i++) {
+        for (Contact contact : contactList) {
 
-            if (fName.equalsIgnoreCase(contactList.get(i).getFName()) && lName.equalsIgnoreCase(contactList.get(i).getLName())) {
-                System.out.println(contactList.get(i).toString());
+            if (fName.equalsIgnoreCase(contact.getFName()) && lName.equalsIgnoreCase(contact.getLName())) {
+                System.out.println(contact.toString());
                 foundMatch = true;
             }
         }
