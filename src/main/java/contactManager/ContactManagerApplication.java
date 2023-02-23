@@ -71,7 +71,10 @@ public class ContactManagerApplication {
             System.out.println((i+1)+". "+contactList.get(i).getFName()+" "+contactList.get(i).getLName());
         }
         System.out.print("Enter a choice: ");
-        int choice = input.getInt(1,contactList.size());
+        int choice = input.getInt(0,contactList.size());
+        if(choice == 0){
+            return;
+        }
         contactList.remove(choice-1);
     }
 
