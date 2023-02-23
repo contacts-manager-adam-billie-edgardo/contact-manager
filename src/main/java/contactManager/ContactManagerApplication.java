@@ -169,7 +169,7 @@ public class ContactManagerApplication {
             System.out.print("Enter contact's last name: ");
             tempLName = input.getString();
 
-            if(getMatchingIndex(tempFName,tempLName) > 0){
+            if(getMatchingIndex(tempFName,tempLName) >= 0){
                 int ndx = getMatchingIndex(tempFName,tempLName);
                 if(input.yesNo("That name already exists. Overwrite? Y/N")){
                     contactList.get(ndx).setFName(tempFName);
