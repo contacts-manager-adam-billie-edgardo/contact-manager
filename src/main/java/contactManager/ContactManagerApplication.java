@@ -200,7 +200,7 @@ public class ContactManagerApplication {
     public static void writeListToFile (Path file, ArrayList<Contact> list){
         ArrayList<String> contactStrings = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            contactStrings.add(list.get(i).toString());
+            contactStrings.add(createStringForFile(list.get(i)));
         }
 
         try {
@@ -208,5 +208,10 @@ public class ContactManagerApplication {
         } catch (IOException e) {
             System.out.println("file write exception: " + e.getMessage());
         }
+    }
+    public static String createStringForFile (Contact contact){
+        //First Name: Jim, Last Name: Jones, Phone Number: (210)555-1234, Email: JJones@web.com
+        String toFile;
+        return toFile = contact.getFName()+","+contact.getLName()+","+contact.getPhoneNum()+","+contact.getEmail();
     }
 }
