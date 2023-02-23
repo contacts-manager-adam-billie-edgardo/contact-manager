@@ -35,7 +35,15 @@ public class Contact {
 
     @Override
     public String toString(){
-        return String.format("First Name: %s, Last Name: %s, Phone Number: %s, Email: %s",this.fName, this.lName,this.phoneNum,this.email);
+        return String.format("""
+                ****************************************************
+                First Name: %s
+                Last Name: %s
+                Phone Number: %s 
+                Email: %s
+                ****************************************************
+                
+                """,this.fName, this.lName,this.phoneNum,this.email);
     }
 
     public void setFName(String fName) {

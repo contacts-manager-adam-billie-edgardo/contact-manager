@@ -123,7 +123,8 @@ public class ContactManagerApplication {
         }
         System.out.printf("""
         Contact changed...
-        New data: %s
+        New data: 
+        %s
         """,contactList.get(choice).toString());
     }
 
