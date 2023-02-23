@@ -91,7 +91,7 @@ public class ContactManagerApplication {
             return;
         }
         choice -= 1; //change choice to match contactList index number
-        contactList.get(choice).toString();
+        System.out.println(contactList.get(choice).toString());
         System.out.print("""
             What would you like to edit?
             1. First name
