@@ -16,7 +16,7 @@ public class Contact {
         this.email = email;
     }
 
-    public String formattedPhoneNum(long phoneNumber){
+    public String formattedPhoneNum(String phoneNumber){
         String formattedPhoneNum = phoneNumber+"";
 
         StringBuilder str = new StringBuilder();
