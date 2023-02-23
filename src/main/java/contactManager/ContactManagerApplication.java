@@ -105,8 +105,8 @@ public class ContactManagerApplication {
             contact.setFName(input.getString());
             System.out.print("Enter contact's last name: ");
             contact.setLName(input.getString());
-            System.out.print("Enter contact's phone number: ");
-            // use getPhoneNumber to validate a 10-digit number from the user
+            contact.setPhoneNum(contact.formattedPhoneNum(input.getString(10, "Enter contact's phone number: ")));
+
             System.out.print("Enter contact's email: ");
             contact.setEmail(input.getString());
             contactList.add(contact);
