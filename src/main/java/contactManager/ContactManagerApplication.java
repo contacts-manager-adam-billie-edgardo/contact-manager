@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import static contactManager.ColorEscapeCodes.*;
 
 public class ContactManagerApplication {
     private static final Input input = new Input();
@@ -175,6 +176,7 @@ public class ContactManagerApplication {
     }
 
     private static void showContacts() {
+        input.getString();
         if (!contactList.isEmpty()) {
             formatListAndPrintToConsole(contactList);
 
@@ -201,18 +203,33 @@ public class ContactManagerApplication {
         int namePadding = getLongestNameSize(contacts);
         int phonePadding = 13;
         int emailPadding = getLongestEmailSize(contacts);
-        System.out.println("_".repeat(namePadding + emailPadding + phonePadding + 10));
-        System.out.printf("| %-" + namePadding + "s | %-" + phonePadding + "s | %-" + emailPadding + "s |%n", "Name", "Phone", "email");
-        System.out.println("-".repeat(namePadding + emailPadding + phonePadding + 10));
+        String horizontalBorder = ANSI_CYAN.code + "-".repeat(namePadding + emailPadding + phonePadding + 10) + ANSI_RESET.code;
+
+        System.out.println(ANSI_CYAN.code + "_".repeat(namePadding + emailPadding + phonePadding + 10) + ANSI_RESET.code);
+        printFormattedListLine("Name", namePadding, "Phone", phonePadding, "email", emailPadding, '|', ANSI_CYAN.code, ANSI_YELLOW.code, 1);
+        System.out.println(horizontalBorder);
         for (Contact contact : contacts) {
-            System.out.printf("| %-" + namePadding + "s | %-10s | %-" + emailPadding + "s |%n",
-                    contact.getFullName(),
-                    contact.getPhoneNum(),
-                    contact.getEmail()
-            );
+            printFormattedListLine(contact.getFullName(), namePadding, contact.getPhoneNum(), phonePadding, contact.getEmail(), emailPadding,
+                    '|', ANSI_CYAN.code, "", 1);
         }
+        System.out.print(horizontalBorder + "\n Press enter to continue");
+        input.getString();
     }
 
+    private static void printFormattedListLine(String firstColString, int firstColPadding,
+                                               String secondColString, int secondColPadding,
+                                               String thirdColString, int thirdColPadding,
+                                               char borderCharacter, String borderColor,
+                                               String bodyColor, int spacesBetweenBorder) {
+        String borderLeft = borderColor + borderCharacter + ANSI_RESET.code + " ".repeat(spacesBetweenBorder);
+        String borderMiddle = " ".repeat(spacesBetweenBorder) + borderColor + borderCharacter + ANSI_RESET.code + " ".repeat(spacesBetweenBorder);
+        String borderRight = " ".repeat(spacesBetweenBorder) + borderColor + borderCharacter + ANSI_RESET.code;
+        String firstBody = bodyColor + "%-" + firstColPadding + "s" + ANSI_RESET.code;
+        String secondBody = bodyColor + "%-" + secondColPadding + "s" + ANSI_RESET.code;
+        String thirdBody = bodyColor + "%-" + thirdColPadding + "s" + ANSI_RESET.code;
+
+        System.out.printf(borderLeft + firstBody + borderMiddle + secondBody + borderMiddle + thirdBody + borderRight + "%n", firstColString, secondColString, thirdColString);
+    }
     private static int getLongestEmailSize(ArrayList<Contact> contacts) {
         int longestStringSize = "email".length();
         for (Contact contact : contacts) {
